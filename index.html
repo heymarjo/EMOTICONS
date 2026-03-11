@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EMOTICONS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #F5F2EE;
+      --card: #FFFFFF;
+      --ink: #1A1A1A;
+      --muted: #888;
+      --accent: #FF4D00;
+      --accent2: #FFB800;
+      --border: #E8E4DF;
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .count-badge {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: var(--border);
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+
+    .twitter-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--ink);
+      border-radius: 50%;
+      transition: transform 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+
+    .twitter-link:hover {
+      background: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .twitter-link svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 64px 40px 48px;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      margin-top: 16px;
+      font-size: 1rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    /* SEARCH */
+    .search-wrap {
+      max-width: 420px;
+      margin: 32px auto 0;
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 14px 20px 14px 48px;
+      border: 1.5px solid var(--border);
+      border-radius: 99px;
+      background: var(--card);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-wrap input::placeholder { color: var(--muted); }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    /* GRID */
+    .grid-wrap {
+      padding: 32px 40px 80px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .card-img-wrap {
+      aspect-ratio: 1;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .card-body {
+      padding: 12px 14px 14px;
+      border-top: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-name {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 6px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s, transform 0.15s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn:active { transform: scale(0.96); }
+
+    .btn-png {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn-png:hover { background: #333; }
+
+    .btn-banner {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-banner:hover { background: #e04400; }
+
+    .btn svg {
+      width: 11px;
+      height: 11px;
+      flex-shrink: 0;
+    }
+
+    /* EMPTY STATE */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* LOADING */
+    .loading {
+      text-align: center;
+      padding: 80px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 999;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 0 20px; }
+      .hero { padding: 40px 20px 32px; }
+      .grid-wrap { padding: 24px 20px 60px; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="logo" href="#">EMOTI<span>CONS</span></a>
+    <div class="header-right">
+      <span class="count-badge" id="countBadge">0 emotes</span>
+      <a class="twitter-link" href="https://x.com/marjohety" target="_blank" rel="noopener" aria-label="Twitter">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Your <em>Emoticons</em><br>Collection</h1>
+    <div class="search-wrap">
+      <span class="search-icon">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input type="text" id="searchInput" placeholder="Search emoticons..." autocomplete="off"/>
+    </div>
+  </section>
+
+  <main class="grid-wrap">
+    <div class="grid" id="grid">
+      <div class="loading">Loading emoticons...</div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ─── CONFIG ───────────────────────────────────────────────
+    // Put your images in the "output" folder next to index.html
+    // Update this list whenever you add new images.
+    // Run `node generate-list.js` to auto-generate, or add manually.
+    // ─────────────────────────────────────────────────────────
+
+    const IMAGE_FOLDER = './output';
+
+    // Auto-scan trick: we'll try to fetch a manifest file first,
+    // then fall back to a hardcoded list for Vercel static hosting.
+    // On Vercel, generate images.json with: ls output/ | python generate-manifest.py
+
+    async function loadImages() {
+      try {
+        const res = await fetch('./images.json');
+        if (!res.ok) throw new Error('no manifest');
+        return await res.json();
+      } catch {
+        // Fallback: return empty, show instructions
+        return [];
+      }
+    }
+
+    // ─── DOWNLOAD HELPERS ────────────────────────────────────
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(t._timer);
+      t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    async function downloadPNG(src, name) {
+      showToast('Preparing PNG...');
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = src; });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 1024; canvas.height = 1024;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, 1024, 1024);
+
+      // Draw centered, keep aspect ratio
+      const scale = Math.min(1024 / img.width, 1024 / img.height);
+      const w = img.width * scale;
+      const h = img.height * scale;
+      ctx.drawImage(img, (1024 - w) / 2, (1024 - h) / 2, w, h);
+
+      canvas.toBlob(blob => {
+        downloadBlob(blob, name + '.png');
+        showToast('PNG downloaded!');
+      }, 'image/png');
+    }
+
+    async function downloadBanner(src, name) {
+      showToast('Preparing Banner...');
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = src; });
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 1500; canvas.height = 500;
+      const ctx = canvas.getContext('2d');
+
+      // White background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, 1500, 500);
+
+      // Center emoji — max 460px tall/wide
+      const maxSize = 460;
+      const scale = Math.min(maxSize / img.width, maxSize / img.height);
+      const w = img.width * scale;
+      const h = img.height * scale;
+      ctx.drawImage(img, (1500 - w) / 2, (500 - h) / 2, w, h);
+
+      canvas.toBlob(blob => {
+        downloadBlob(blob, name + '_banner.png');
+        showToast('Banner downloaded!');
+      }, 'image/png');
+    }
+
+    // ─── RENDER ───────────────────────────────────────────────
+
+    const dlIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 4v12m0 0-4-4m4 4 4-4M4 20h16"/></svg>`;
+
+    function renderGrid(images, filter = '') {
+      const grid = document.getElementById('grid');
+      const filtered = filter
+        ? images.filter(n => n.toLowerCase().includes(filter.toLowerCase()))
+        : images;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = filter
+          ? `<div class="empty">No results for "<strong>${filter}</strong>"</div>`
+          : `<div class="empty">
+              No images found.<br><br>
+
+             </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(filename => {
+        const src = `${IMAGE_FOLDER}/${filename}`;
+        const name = filename.replace(/\.[^/.]+$/, '');
+        return `
+          <div class="card">
+            <div class="card-img-wrap">
+              <img src="${src}" alt="${name}" loading="lazy" />
+            </div>
+            <div class="card-body">
+              <div class="card-name">${name}</div>
+              <div class="btn-group">
+                <button class="btn btn-png" onclick="downloadPNG('${src}','${name}')">
+                  ${dlIcon} PNG
+                </button>
+                <button class="btn btn-banner" onclick="downloadBanner('${src}','${name}')">
+                  ${dlIcon} Banner
+                </button>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ─── INIT ─────────────────────────────────────────────────
+
+    let allImages = [];
+
+    loadImages().then(images => {
+      allImages = images;
+      document.getElementById('countBadge').textContent =
+        images.length + (images.length === 1 ? ' emote' : ' emotes');
+      renderGrid(images);
+    });
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      renderGrid(allImages, e.target.value.trim());
+    });
+  </script>
+</body>
+</html>
